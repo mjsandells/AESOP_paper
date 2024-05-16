@@ -543,3 +543,19 @@ def get_obs_per_aoi(flight):
 
         obs_aois.update({channel: aoi_obs})
     return pd.concat(obs_aois, axis=1)
+
+
+def relabel_pits(pit_list):
+    pit_dictionary = {"A02C":"1-2C", "A02E":"2-2E", "A02W": "3-2W",
+                 "A03C1":"4-3C1", "A03E":"5-3E", "A03W":"6-3W",
+                 "A04C":"7-4C", "A04C1": "8-4C1", "A04N": "9-4N",
+                 "A04N1":"10-4N1", "A04S":"11-4S", "A04S1": "12-4S1",
+                 "MetS":"13-MetS", "A05C":"14-5C", "A05C1":"15-5C1",
+                 "A05E":"16-5E", "A05N":"17-5N", "A05W":"18-5W",
+                 "A06C": "19-6C", "A06N":"20-6N", "A06S1":"21-6S1",
+                 "A07C":"22-7C", "A07W":"23-7W", "A08C":"24-8C",
+                 "A08E":"25-8E", "A08W":"26-8W", "A08W1":"27-W1",
+                 "A09E":"28-9E", "A09W":"29-9W"} 
+    #convert the list to a pandas series temporarily before mapping
+    relabelled = (pd.Series(pit_list)).map(pit_dictionary) 
+    return list(relabelled)
